@@ -1,6 +1,51 @@
-﻿@{
-    ViewData["Title"] = "Privacy Policy";
-}
-<h1>@ViewData["Title"]</h1>
+﻿<h2>Registered User</h2>
 
-<p>Use this page to detail your site's privacy policy.</p>
+
+<div id="grid"></div>
+
+<script>
+    $(document).ready(function () {
+        $("#grid").kendoGrid({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/Home/ReadView",
+                        dataType: "json"
+                    }
+                    
+                },
+                schema: {
+                    model: {
+                        id: "id",
+                        fields: {
+                            name: { type: "string" },
+                            phone: { type: "double" },
+                            email: { type: "string" },
+                            address: { type: "string" },
+                            dob: { type: "date" },
+                            city: { type: "string" },
+                            state: { type: "string" },
+
+                        }
+                    }
+                },
+                pageSize: 10
+            },
+            height: 550,
+            editable: true,
+            sortable: true,
+            pageable: true,
+            columns: [
+                { field: "name", title: "Name" },
+                { field: "phone", title: "Phone" },
+                { field: "email", title: "Email" },
+                { field: "address", title: "Address" },
+                { field: "dob", title: "Date of Birth", format: "{0:MM/dd/yyyy}" },
+                { field: "city", title: "City" },
+                { field: "state", title: "State" },
+
+            ]
+        });
+    });
+</script>
+

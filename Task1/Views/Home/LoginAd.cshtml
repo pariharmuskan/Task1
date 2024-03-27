@@ -1,98 +1,107 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+﻿
 <style>
-body {font-family: Arial, Helvetica, sans-serif;}
-form {border: 3px solid #f1f1f1;}
+    .customHeading {
+        color: #30c6b0;
+    }
 
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-}
+    .custom-form-group label {
+        color: #30c6b0;
+        font-size: 13px;
+        font-weight: bold;
+        letter-spacing: 2px;
+    }
 
-button {
-  background-color: #04AA6D;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-}
+    .custom-form-group span {
+        width: 32px;
+        border-bottom: 1px solid #30c6b0;
+        vertical-align: middle;
+        color: #30c6b0;
+        display: inline;
+    }
 
-button:hover {
-  opacity: 0.8;
-}
+    .custom-form-group input {
+        width: calc(100% - 32px);
+        border: none;
+        border-bottom: 1px solid #30c6b0;
+        box-sizing: content-box;
+        outline: none;
+    }
 
-.cancelbtn {
-  width: auto;
-  padding: 10px 18px;
-  background-color: #f44336;
-}
+    .custom-btn {
+        border-radius: 32px;
+        background: #30c6b0;
+        border: 2px solid transparent;
+        color: #fff;
+        height: 48px;
+    }
 
-.imgcontainer {
-  text-align: center;
-  margin: 24px 0 12px 0;
-}
+        .custom-btn:hover {
+            background: #fff;
+            border: none;
+            border: 2px solid #30c6b0;
+            color: #30c6b0;
+        }
 
-img.avatar {
-  width: 40%;
-  border-radius: 50%;
-}
+    #formPanel {
+        min-width: 280px;
+        max-width: 320px;
+        width: 100%;
+        margin: 0 auto;
+    }
 
-.container {
-  padding: 16px;
-}
+    .objectFit {
+        object-fit: cover;
+        width: 100%;
+        max-width: 320px;
+        min-height: 60vh;
+        margin: 0 auto
+    }
 
-span.password {
-  float: right;
-  padding-top: 16px;
-}
+    #showCursor {
+        cursor: pointer
+    }</style>
 
-/* Change styles for span and cancel button on extra small screens */
-@@media screen and (max-width: 300px) {
-            span.password {
-     display: block;
-     float: none;
-  }
-  .cancelbtn {
-     width: 100%;
-  }
-}
-</style>
-</head>
-<body>
-
-<h2>Login Form</h2>
-
-<form action="/Home/LoginAd" method="post">
-  <div class="imgcontainer">
-    <img src="img_avatar2.png" alt="Avatar" class="avatar">
-  </div>
-
-  <div class="container">
-    <label for="uname"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="username" required>
-
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="password" required>
-        
-    <button type="submit">Login</button>
-    <label>
-      <input type="checkbox" checked="checked" name="remember"> Remember me
-    </label>
-  </div>
-
-  <div class="container" style="background-color:#f1f1f1">
-    <button type="button" class="cancelbtn">Cancel</button>
-    <span class="psw">Forgot <a href="#">password?</a></span>
-  </div>
-</form>
-
-</body>
-</html>
+<div class="min-vh-100 d-flex align-items-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-7 mx-auto">
+                <div class="shadow-lg">
+                    <div class="d-flex align-items-center">
+                        <div class="d-none d-md-block d-lg-block">
+                            <img src="/static_files/images/html/thApp.jpg" class="objectFit" />
+                        </div>
+                        <div class="p-4" id="formPanel">
+                            <div class="text-center mb-5">
+                                <h1 class="customHeading h3 text-uppercase">Login</h1>
+                            </div>
+                            <form method="post" action="/Home/LoginAd">
+                                <div class="custom-form-group">
+                                    <label class="text-uppercase" for="username">Username</label>
+                                    <input type="text" id="username" class="pb-1" name="email" /><span class="pb-1"><i class="fas fa-user"></i></span>
+                                </div>
+                                <div class="custom-form-group mt-3">
+                                    <label class="text-uppercase" for="password">Password</label>
+                                    <input type="password" id="password" class="pb-1" name="password"/><span class="pb-1"><i id="showCursor" class="fas fa-eye-slash" onclick="showPassword(event)"></i></span>
+                                </div>
+                                <div class="mt-5">
+                                    <button type="submit"class="w-100 p-2 d-block custom-btn">Login</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function showPassword(e) {
+        var input = document.getElementById('password')
+        if (input.type === 'password') {
+            input.type = "text"
+            e.target.className = "fas fa-eye"
+        } else {
+            input.type = "password"
+            e.target.className = "fas fa-eye-slash"
+        }
+    }</script>

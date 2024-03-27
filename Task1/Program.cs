@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Task1.Models;
 
 namespace RoleBasesAuthorization
 {
@@ -18,10 +19,10 @@ namespace RoleBasesAuthorization
 
             ConfigureServices(builder.Services); // Call the ConfigureServices method
 
-            //builder.Services.AddDbContext<MVCDemoDbContext>(options =>
-            //{
-            //    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
-            //});
+           
+            builder.Services.AddDbContext<EDbContext>(options =>
+options.UseNpgsql(builder.Configuration.GetConnectionString("ListString")));
+
             var app = builder.Build();
 
             if (!app.Environment.IsDevelopment())
@@ -44,7 +45,7 @@ namespace RoleBasesAuthorization
             app.Run();
         }
 
-        // Configure services method
+        
         private static void ConfigureServices(IServiceCollection services)
         {
             services.Configure<CookiePolicyOptions>(options =>

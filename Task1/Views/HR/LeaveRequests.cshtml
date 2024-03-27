@@ -1,0 +1,38 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model List<LeaveRequest>
+<table>
+    <thead>
+        <tr>
+            <th>Employee Name</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var leaveRequest in Model)
+        {
+            <tr>
+                <td>@leaveRequest.Employee.Name</td>
+                <td>@leaveRequest.StartDate.ToShortDateString()</td>
+                <td>@leaveRequest.EndDate.ToShortDateString()</td>
+                <td>@(leaveRequest.Approved ? "Approved" : "Pending")</td>
+                <td>
+                    <form asp-controller="HR" asp-action="Approve" method="post">
+                        <input type="hidden" name="id" value="@leaveRequest.Id" />
+                        <button type="submit">Approve</button>
+                    </form>
+                    <form asp-controller="HR" asp-action="Reject" method="post">
+                        <input type="hidden" name="id" value="@leaveRequest.Id" />
+                        <button type="submit">Reject</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
